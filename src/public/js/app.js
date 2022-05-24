@@ -33,8 +33,22 @@ async function getCameras() {
     console.log(e);
   }
 }
+let  newcount = 0
 
 async function getMedia(deviceId) {
+  socket.on("count",async (count)=>{
+    console.log("-------------")
+    console.log("-------------")
+    console.log("-------------")
+    console.log("-------------")
+    console.log(count)
+    newcount = count + 1
+  })
+  console.log("============")
+  console.log("============")
+  console.log("============")
+  console.log("============")
+  console.log(newcount)
   const initialConstrains = {
     audio: true,
     video: { facingMode: "user" },

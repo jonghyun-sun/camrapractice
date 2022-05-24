@@ -13,8 +13,13 @@ app.get("/*", (_, res) => res.redirect("/"));
 const httpServer = http.createServer(app);
 const wsServer = SocketIO(httpServer);
 
+function countRoom(roomName){ //룸안에 몇명 있나 확인 
+  return wsServer.sockets.adapter.rooms.get(roomName)?.size
+}
+
 wsServer.on("connection", (socket) => {
   socket.on("join_room", (roomName) => {
+    socket.emit("count",countRoom(roomName))
     socket.join(roomName);
     socket.to(roomName).emit("welcome");
   });
